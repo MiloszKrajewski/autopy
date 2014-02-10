@@ -25,14 +25,14 @@ MOD_INIT(bitmap)
 	PyObject *mod;
 	MOD_DEF(mod, "bitmap", BitmapMethods, "autopy module for working with bitmaps");
 	if (mod == NULL) 
-		return MOD_ERROR_VAL; /* Error */
+		MOD_INIT_FAIL; /* Error */
 
 	/* Instantiate new "Bitmap" class so that it is available in the module. */
 	if (Py_AddClassToModule(mod, &Bitmap_Type) < 0) {
-		return MOD_ERROR_VAL; /* Error */
+		MOD_INIT_FAIL; /* Error */
 	}
 	
-	return MOD_SUCCESS_VAL(mod);
+	MOD_INIT_RETURN(mod);
 }
 
 static PyObject *bitmap_capture_screen(PyObject *self, PyObject *arg)

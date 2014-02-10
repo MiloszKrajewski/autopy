@@ -46,7 +46,7 @@ static PyMethodDef ScreenMethods[] = {
 MOD_INIT(screen)
 {
 	PyObject *m;
-	MOD_DEF("screen", ScreenMethods, "autopy module for working with the screen");
+	MOD_DEF(m, "screen", ScreenMethods, "autopy module for working with the screen");
 	MOD_INIT_RETURN(m);
 }
 

@@ -64,19 +64,19 @@ MOD_INIT(mouse)
 
 	MOD_DEF(mod, "mouse", MouseMethods, "autopy module for working with the mouse");
 	if (mod == NULL) 
-		return MOD_ERROR_VAL; /* Error */
+		MOD_INIT_FAIL; /* Error */
 
 	/* Add mouse button constants for click_mouse(). */
 	if (PyModule_AddIntMacro(mod, LEFT_BUTTON) < 0 ||
 		PyModule_AddIntMacro(mod, RIGHT_BUTTON) < 0 ||
 		PyModule_AddIntMacro(mod, CENTER_BUTTON) < 0) {
 		PyErr_SetString(PyExc_ValueError, "Error adding constants to mouse module");
-		return MOD_ERROR_VAL;
+		MOD_INIT_FAIL;
 	}
 
 	deadbeef_srand_time();
 	
-	return MOD_SUCCESS_VAL(mod);
+	MOD_INIT_RETURN(mod);
 }
 
 static PyObject *mouse_move(PyObject *self, PyObject *args)

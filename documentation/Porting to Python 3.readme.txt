@@ -1,0 +1,16 @@
+For full article check out:
+http://python3porting.com/cextensions.html
+
+This is just a checklist:
+
+0. Replace "#include <Python.h>" with "#include "python3to2adapter.h"
+1. Replace all "statichere" and "staticforward" with just "static"
+2. Replace "PyClassObject" with "PyTypeObject"
+3. Replace "PyObject_HEAD_INIT(NULL) 0," with "PyVarObject_HEAD_INIT(NULL, 0)". Mind the commas!
+4. Replace "ob->ob_type" with "Py_TYPE(ob)"
+5. Replace "mod = Py_InitModule3(<name>, <methods>, <doc>)" with "MOD_DEF(mod, <name>, <methods>, <doc>)"
+6. Replace "PyMODINIT_FUNC init<yourmodulename>(void)" with "MOD_INIT(yourmodulename)"
+7. Return from init function with "MOD_INIT_RETURN(mod)" on success or either "MOD_INIT_FAIL" or "MOD_INIT_RETURN(NULL)" on failure
+8. Replace "PyCObject_FromVoidPtr((void *)pointer_to_value, NULL);" with "PyCapsule_New((void *)pointer_to_value, NULL, NULL)"
+9. Remove references to "PyObject_Compare"
+10. Replace "PyString" with "PyUnicode" or "PyBytes"

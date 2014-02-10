@@ -2,11 +2,11 @@
 #ifndef AUTOPY_SCREEN_MODULE_H
 #define AUTOPY_SCREEN_MODULE_H
 
-#include <Python.h>
+#include "python3to2adapter.h"
 
 /* Summary: autopy module for working with the screen */
 /* Description: This module contains functions for obtaining attributes
                 about the screen. */
-PyMODINIT_FUNC initscreen(void);
+MOD_INIT(screen);
 
 #endif /* AUTOPY_SCREEN_MODULE_H */

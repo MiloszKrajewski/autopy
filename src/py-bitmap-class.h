@@ -2,7 +2,7 @@
 #ifndef PY_BITMAP_CLASS_H
 #define PY_BITMAP_CLASS_H
 
-#include <Python.h>
+#include "python3to2adapter.h"
 #include <structmember.h> /* For PyObject_HEAD, etc. */
 #include "MMBitmap.h"
 

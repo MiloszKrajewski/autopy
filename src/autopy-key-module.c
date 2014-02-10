@@ -61,7 +61,7 @@ MOD_INIT(key)
 	PyObject *mod;
 	MOD_DEF(mod, "key", KeyMethods, "autopy module for working with the keyboard");
 	if (mod == NULL) 
-		return MOD_ERROR_VAL; /* Error */
+		MOD_INIT_FAIL; /* Error */
 
 	/* Needed for type_string(). */
 	deadbeef_srand_time();
@@ -102,9 +102,9 @@ MOD_INIT(key)
 		PyModule_AddIntMacro(mod, K_SHIFT) < 0 ||
 		PyModule_AddIntMacro(mod, K_CAPSLOCK) < 0) {
 		PyErr_SetString(PyExc_ValueError, "Error adding keycode constants");
-		return MOD_ERROR_VAL;
+		MOD_INIT_FAIL;
 	}
-	return MOD_SUCCESS_VAL(mod);
+	MOD_INIT_RETURN(mod);
 }
 
 /*  Attempts to extract MMKeyCode from PyInt. Returns false and sets error if
@@ -129,7 +129,7 @@ static PyObject *key_toggle(PyObject *self, PyObject *args)
 		MMKeyCode code;
 		if (!MMKeyCodeFromPyInt(key, &code)) return NULL;
 		toggleKeyCode(code, downBool == Py_True, flags);
-	} else if (PyString_Check(key)) { /* Check for single-character string */
+	} else if (PyStringU_Check(key)) { /* Check for single-character string */
 		char c;
 		if (!charFromPyString(key, &c)) return NULL;
 		toggleKey(c, downBool == Py_True, flags);
@@ -151,7 +151,7 @@ static PyObject *key_tap(PyObject *self, PyObject *args)
 		MMKeyCode code;
 		if (!MMKeyCodeFromPyInt(key, &code)) return NULL;
 		tapKeyCode(code, flags);
-	} else if (PyString_Check(key)) { /* Check for single-character string */
+	} else if (PyStringU_Check(key)) { /* Check for single-character string */
 		char c;
 		if (!charFromPyString(key, &c)) return NULL;
 		tapKey(c, flags);

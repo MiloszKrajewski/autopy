@@ -2,7 +2,7 @@
 #ifndef AUTOPY_MOUSE_MODULE_H
 #define AUTOPY_MOUSE_MODULE_H
 
-#include <Python.h>
+#include "python3to2adapter.h"
 
 /* Summary: autopy module for working with the mouse */
 /* Description: This module contains functions for getting the current state of
@@ -10,6 +10,6 @@
 
 		Unless otherwise stated, coordinates are those of a screen
                 coordinate system, where the origin is at the top left. */
-PyMODINIT_FUNC initmouse(void);
+MOD_INIT(mouse);
 
 #endif /* AUTOPY_MOUSE_MODULE_H */

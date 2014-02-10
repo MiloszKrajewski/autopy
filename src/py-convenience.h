@@ -2,7 +2,7 @@
 #ifndef PYCONVENIENCE_H
 #define PYCONVENIENCE_H
 
-#include <Python.h>
+#include "python3to2adapter.h"
 
 /* Checks class is ready and adds it to module.
  * 0 is returned on success, -1 on failure. */
