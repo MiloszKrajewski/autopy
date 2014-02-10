@@ -28,7 +28,7 @@ PyObject *Py_SetArgConvertErr(const char *expected, unsigned arg_count,
 {
 	PyErr_SetFormatString(PyExc_TypeError, 130,
 	                      "argument %u must be %.50s, not %.50s",
-	                      arg_count, expected, obj->ob_type->tp_name);
+	                      arg_count, expected, Py_TYPE(obj)->tp_name);
 	return NULL;
 }
 
@@ -36,6 +36,6 @@ PyObject *Py_SetConvertErr(const char *expected, PyObject *obj)
 {
 	PyErr_SetFormatString(PyExc_TypeError, 123,
 	                      "argument must be %.50s, not %.50s",
-	                      expected, obj->ob_type->tp_name);
+	                      expected, Py_TYPE(obj)->tp_name);
 	return NULL;
 }

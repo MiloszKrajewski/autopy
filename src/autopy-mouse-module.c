@@ -58,22 +58,25 @@ static PyMethodDef MouseMethods[] = {
 	{NULL, NULL, 0, NULL} /* Sentinel */
 };
 
-PyMODINIT_FUNC initmouse(void)
+MOD_INIT(mouse)
 {
-	PyObject *mod = Py_InitModule3("mouse", MouseMethods,
-	                               "autopy module for working with the mouse");
+	PyObject *mod;
 
-	if (mod == NULL) return; /* Error */
+	MOD_DEF(mod, "mouse", MouseMethods, "autopy module for working with the mouse");
+	if (mod == NULL) 
+		return MOD_ERROR_VAL; /* Error */
 
 	/* Add mouse button constants for click_mouse(). */
 	if (PyModule_AddIntMacro(mod, LEFT_BUTTON) < 0 ||
 		PyModule_AddIntMacro(mod, RIGHT_BUTTON) < 0 ||
 		PyModule_AddIntMacro(mod, CENTER_BUTTON) < 0) {
 		PyErr_SetString(PyExc_ValueError, "Error adding constants to mouse module");
-		return;
+		return MOD_ERROR_VAL;
 	}
 
 	deadbeef_srand_time();
+	
+	return MOD_SUCCESS_VAL(mod);
 }
 
 static PyObject *mouse_move(PyObject *self, PyObject *args)

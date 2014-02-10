@@ -27,10 +27,11 @@ static PyMethodDef AlertMethods[] = {
 	{NULL, NULL, 0, NULL} /* Sentinel */
 };
 
-PyMODINIT_FUNC initalert(void)
+MOD_INIT(alert)
 {
-	Py_InitModule3("alert", AlertMethods,
-	               "autopy module for displaying alerts");
+	PyObject* m;
+	MOD_DEF(m, "alert", AlertMethods, "autopy module for displaying alerts");
+	MOD_INIT_RETURN(m);
 }
 
 static PyObject *alert_alert(PyObject *self, PyObject *args, PyObject *kwds)

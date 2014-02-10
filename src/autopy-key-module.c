@@ -56,12 +56,12 @@ static PyMethodDef KeyMethods[] = {
 	{NULL, NULL, 0, NULL} /* Sentinel */
 };
 
-PyMODINIT_FUNC initkey(void)
+MOD_INIT(key)
 {
-	PyObject *mod = Py_InitModule3("key", KeyMethods,
-	                               "autopy module for working with the "
-	                               "keyboard");
-	if (mod == NULL) return; /* Error */
+	PyObject *mod;
+	MOD_DEF(mod, "key", KeyMethods, "autopy module for working with the keyboard");
+	if (mod == NULL) 
+		return MOD_ERROR_VAL; /* Error */
 
 	/* Needed for type_string(). */
 	deadbeef_srand_time();
@@ -102,8 +102,9 @@ PyMODINIT_FUNC initkey(void)
 		PyModule_AddIntMacro(mod, K_SHIFT) < 0 ||
 		PyModule_AddIntMacro(mod, K_CAPSLOCK) < 0) {
 		PyErr_SetString(PyExc_ValueError, "Error adding keycode constants");
-		return;
+		return MOD_ERROR_VAL;
 	}
+	return MOD_SUCCESS_VAL(mod);
 }
 
 /*  Attempts to extract MMKeyCode from PyInt. Returns false and sets error if

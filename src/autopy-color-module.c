@@ -29,10 +29,11 @@ static PyMethodDef ColorMethods[] = {
 	{NULL, NULL, 0, NULL} /* Sentinel */
 };
 
-PyMODINIT_FUNC initcolor(void)
+MOD_INIT(color)
 {
-	Py_InitModule3("color", ColorMethods,
-	               "autopy module for converting between color formats");
+	PyObject *m;
+	MOD_DEF(m, "color", ColorMethods, "autopy module for converting between color formats");
+	MOD_INIT_RETURN(m);
 }
 
 static PyObject *color_hex_to_rgb(PyObject *self, PyObject *args)

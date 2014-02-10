@@ -17,7 +17,7 @@ static void Bitmap_dealloc(BitmapObject *self)
 		destroyMMBitmap(self->bitmap);
 		self->bitmap = NULL;
 	}
-	self->ob_type->tp_free((PyObject *)self);
+	Py_TYPE(self)->tp_free((PyObject *)self);
 }
 
 /* -- Bitmap Class method declarations -- */
@@ -235,8 +235,7 @@ static PyMethodDef Bitmap_methods[] = {
 
 /* Ridiculous monstrosity */
 PyTypeObject Bitmap_Type = {
-   PyObject_HEAD_INIT(NULL)
-   0,                             /* ob_size */
+   PyVarObject_HEAD_INIT(NULL, 0) /* ob_size */
    "Bitmap",                      /* tp_name */
    sizeof(BitmapObject),          /* tp_basicsize */
    0,                             /* tp_itemsize */

@@ -43,10 +43,11 @@ static PyMethodDef ScreenMethods[] = {
 	{NULL, NULL, 0, NULL} /* Sentinel */
 };
 
-PyMODINIT_FUNC initscreen(void)
+MOD_INIT(screen)
 {
-	Py_InitModule3("screen", ScreenMethods, "autopy module for working with "
-	                                        "the screen");
+	PyObject *m;
+	MOD_DEF("screen", ScreenMethods, "autopy module for working with the screen");
+	MOD_INIT_RETURN(m);
 }
 
 static PyObject *screen_get_size(PyObject *self, PyObject *args)
