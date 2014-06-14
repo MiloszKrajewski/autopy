@@ -1,11 +1,16 @@
 #!/usr/bin/env python
+from __future__ import print_function
 import os
 import platform
 import sys
 import textwrap
 
 from distutils.core import setup, Extension
-from commands import getoutput
+
+try:
+    from subprocess import getoutput
+except:
+    from commands import getoutput
 
 # Determine platform being used.
 system = platform.system()
@@ -47,7 +52,7 @@ def create_package_dir(package_name, docstring, module_names):
         f.close()
 
     if update_file:
-        print 'Updating __init__.py'
+        print('Updating __init__.py')
         f = open(init_path, 'w')
         f.write(file_contents)
         f.close()
@@ -158,7 +163,7 @@ def create_ext_modules(src_dir):
         for module in 'mouse', 'key', 'screen', 'bitmap', 'alert':
             add_lib(modules[module], 'user32')
         for module in 'screen', 'bitmap':
-            add_lib(modules[module], 'Gdi32')
+            add_lib(modules[module], 'gdi32')
 
         # MSVC doesn't use same lib names as everybody else.
         for wrong_lib in 'png', 'z':
