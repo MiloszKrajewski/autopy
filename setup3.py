@@ -153,8 +153,7 @@ def create_ext_modules(src_dir):
 
             # The "libraries" option doesn't appear to cater to MSVC, so we
             # have to add this flag separately:
-            # WARN:MAK commented for MINGW
-            # modules[module].setdefault('lflags', []).append(lib + '.lib')
+            modules[module].setdefault('lflags', []).append(lib + '.lib')
 
         for module in 'mouse', 'key', 'screen', 'bitmap', 'alert':
             add_lib(modules[module], 'user32')

@@ -23,26 +23,20 @@
 	#define MOD_INIT_FAIL { return; }
 #endif
 
-#if PY_MAJOR_VERSION < 3
-	#define PyInt_FromLong PyLong_FromLong
-#endif
-
 #if PY_MAJOR_VERSION >=3
 	#define Py_TPFLAGS_HAVE_ITER 0
 #endif
 
-#if PY_MAJOR_VERSION < 3
-	#define PyStringU_FromFormat PyString_FromFormat
-	#define PyStringU_Check PyString_Check
-	#define PyStringB_FromString PyString_FromString
-#else
-	#define PyStringU_FromFormat PyUnicode_FromFormat
-	#define PyStringU_Check PyUnicode_Check
-	#define PyStringB_FromString PyBytes_FromString
+#if PY_MAJOR_VERSION >=3
 	#define PyInt_Check PyLong_Check
 	#define PyInt_AsUnsignedLongMask PyLong_AsUnsignedLongMask
+	#define PyInt_FromLong PyLong_FromLong
+	
+	#define PyString_Check PyBytes_Check
+	#define PyString_FromFormat PyBytes_FromFormat
+	#define PyString_FromString PyBytes_FromString
+	#define PyString_Size PyBytes_Size
+	#define PyString_AS_STRING PyBytes_AS_STRING
 #endif
-
-
 
 #endif // __PYTHON2TO3ADAPTER_H

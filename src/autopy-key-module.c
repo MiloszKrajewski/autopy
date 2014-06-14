@@ -129,7 +129,7 @@ static PyObject *key_toggle(PyObject *self, PyObject *args)
 		MMKeyCode code;
 		if (!MMKeyCodeFromPyInt(key, &code)) return NULL;
 		toggleKeyCode(code, downBool == Py_True, flags);
-	} else if (PyStringU_Check(key)) { /* Check for single-character string */
+	} else if (PyString_Check(key)) { /* Check for single-character string */
 		char c;
 		if (!charFromPyString(key, &c)) return NULL;
 		toggleKey(c, downBool == Py_True, flags);
@@ -151,7 +151,7 @@ static PyObject *key_tap(PyObject *self, PyObject *args)
 		MMKeyCode code;
 		if (!MMKeyCodeFromPyInt(key, &code)) return NULL;
 		tapKeyCode(code, flags);
-	} else if (PyStringU_Check(key)) { /* Check for single-character string */
+	} else if (PyString_Check(key)) { /* Check for single-character string */
 		char c;
 		if (!charFromPyString(key, &c)) return NULL;
 		tapKey(c, flags);
